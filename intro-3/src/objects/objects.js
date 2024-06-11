@@ -22,13 +22,7 @@ export function mergeObjects(object1, object2) {
 // Dato un oggetto e un array con chiave-valore, aggiungere chiave-valore all'oggetto
 // senza modificare l'originale, ma restituendo una copia
 export function setPropery(object, [key, value]) {
-  Object.keys(object).map((objectKey) => {
-    if (objectKey === key) {
-      return value
-    } else {
-      return object[objectKey]
-    }
-  })
+  return Object.fromEntries([...Object.entries(object), [key, value]])
 }
 
 // Convertire un oggetto contentene altri oggetti in array
