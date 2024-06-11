@@ -137,7 +137,6 @@ export function removeProperties(array, properties) {
 // L'array originale e i suoi elementi non devono essere modificati
 export function setSelected(array, selectedIds) {
   return array.map((item) => {
-    console.log(item.id, selectedIds)
     return selectedIds.some((id) => item.id === id)
       ? { ...item, selected: true }
       : item
