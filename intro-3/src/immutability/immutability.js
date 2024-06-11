@@ -26,25 +26,7 @@ export const users = Object.freeze([user10])
 
 // addressChanges è un oggetto che contiene una o più proprietà di Address da cambiare, ad esempio { city: London }
 // Ritornare l'array di utenti con le proprietà cambiate, mantenendo invariate quelle non presenti in addressChanges
-export const changeUsersAddress = (users, addressChanges) => {
-  // const result = []
-  // for (const user of users) {
-  //   const newUser = Object.entries(user).reduce((acc, [key, value]) => {
-  //     if (typeof value === 'object') {
-  //       acc[key] = changeUsersAddress(value, addressChanges)[0]
-  //     } else {
-  //       if (key in Object.keys(addressChanges)) {
-  //         acc[key] = addressChanges[key]
-  //       } else {
-  //         acc[key] = value
-  //       }
-  //     }
-  //     return acc
-  //   }, {})
-  //   result.push(newUser)
-  // }
-  // return result
-}
+export const changeUsersAddress = (users, addressChanges) => {}
 
 // Ritornare l'array di utenti senza geo in address
 export const removeAddressCoordinates = (users) => {
