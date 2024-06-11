@@ -120,11 +120,11 @@ export function addExtraProperties(array, properties) {
 // deve restituire [{ id: 1, name: 'A' }]
 // L'array originale e i suoi elementi non devono essere modificati
 export function removeProperties(array, properties) {
-  return array.map((item) => {
-    return Object.fromEntries(
+  return array.map((item) =>
+    Object.fromEntries(
       Object.entries(item).filter(([key, _]) => !properties.includes(key))
     )
-  })
+  )
 }
 
 // Dato un array di oggetti con una chiave id e un array di id selezionati,
