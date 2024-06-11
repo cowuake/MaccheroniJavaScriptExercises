@@ -156,7 +156,7 @@ export function countTreeLeafNodes(tree) {
 // Es. 2: { movies: ['Shrek', 'Shrek 2'] } e 'movies.1' ritorna 'Shrek 2'
 export function get(object, path, fallback) {
   const [key, route] = path.split('.')
-  return object[key][route]
+  return object[key][route] ?? fallback
 }
 
 // Dato un oggetto con una struttura non uniforme contentente informazioni geografiche
