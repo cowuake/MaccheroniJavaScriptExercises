@@ -124,12 +124,9 @@ export function addExtraProperties(array, properties) {
 // L'array originale e i suoi elementi non devono essere modificati
 export function removeProperties(array, properties) {
   return array.map((item) => {
-    // NOTE: See Object.FromEntries
-    const newItem = { ...item }
-    for (const key of properties) {
-      delete newItem[key]
-    }
-    return newItem
+    return Object.fromEntries(
+      Object.entries(item).filter(([key, _]) => !properties.includes(key))
+    )
   })
 }
 
