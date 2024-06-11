@@ -178,10 +178,9 @@ export function getTotal(products, discounts) {
     const discount = product.special
       ? discounts.special ?? 0
       : discounts.default ?? 0
-    const result =
-      acc + product.price * product.quantity * (1 - discount / 100.0)
-    return Math.round(result * 100) / 100.0
-  }, 0.0)
+    const result = acc + product.price * product.quantity * (1 - discount / 100)
+    return Math.round(result * 100) / 100
+  }, 0)
 }
 
 // Dati un array di post, di commenti e di utenti (vedere in mock.js), creare un nuovo array dove ogni post include:
