@@ -154,7 +154,10 @@ export function countTreeLeafNodes(tree) {
 // specificando un numero come indice. Se la proprietà non esiste ritornare fallback o undefined.
 // Es. 1: { address: { city: 'New York' } } e 'address.city' ritorna 'New York'
 // Es. 2: { movies: ['Shrek', 'Shrek 2'] } e 'movies.1' ritorna 'Shrek 2'
-export function get(object, path, fallback) {}
+export function get(object, path, fallback) {
+  const [key, route] = path.split('.')
+  return object[key][route]
+}
 
 // Dato un oggetto con una struttura non uniforme contentente informazioni geografiche
 // su strade e punti di interesse, generare un oggetto GeoJSON (RFC 7946) valido.
