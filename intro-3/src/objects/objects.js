@@ -155,7 +155,16 @@ export function countTreeLeafNodes(tree) {
 // Es. 1: { address: { city: 'New York' } } e 'address.city' ritorna 'New York'
 // Es. 2: { movies: ['Shrek', 'Shrek 2'] } e 'movies.1' ritorna 'Shrek 2'
 export function get(object, path, fallback) {
-  const [key, route] = path.split('.')
+  const [key, route, inner] = path.split('.')
+  if (inner) {
+    return get(object[key], [route, inner].join('.'), fallback)
+  }
+  if (!object[key]) {
+    return fallback
+  }
+  if (typeof object[key] !== 'object') {
+    return object[key]
+  }
   return object[key][route] ?? fallback
 }
 
