@@ -248,22 +248,9 @@ export function every(array, predicate) {
 
 // Implementare il metodo nativo Array.reduce()
 export function reduce(array, reducer, initialState) {
-  // User first item for initializing the accumulator
-  let acc = initialState
-  if (!initialState) {
-    switch (typeof array[0]) {
-      case 'number':
-        acc = 0
-        break
-      case 'string':
-        acc = ''
-        break
-      default:
-        acc = {}
-        break
-    }
-  }
-  for (let i = 0; i < array.length; i++) {
+  let acc = initialState !== undefined ? initialState : array[0]
+  const startIdx = initialState !== undefined ? 0 : 1
+  for (let i = startIdx; i < array.length; i++) {
     acc = reducer(acc, array[i], i)
   }
   return acc
