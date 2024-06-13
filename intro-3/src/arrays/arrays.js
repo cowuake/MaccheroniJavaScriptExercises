@@ -145,8 +145,9 @@ export function setSelected(array, selectedIds) {
 // deve restituire ['A', 'B', 'C']
 // Se la chiave non esiste, ritornare l'elemento originale
 export function mapTo(array, key) {
-  // Original element... By reference! LOL
-  return array.map((item) => item[key] ?? item)
+  return array.some((item) => !item[key])
+    ? array
+    : array.map((item) => item[key] ?? item)
 }
 
 // Dato un array di oggetti e una funzione `predicate`, eseguire la funzione per ogni elemento
