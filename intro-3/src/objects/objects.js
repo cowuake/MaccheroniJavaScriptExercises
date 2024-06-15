@@ -166,7 +166,45 @@ export function get(object, path, fallback) {
 // su strade e punti di interesse, generare un oggetto GeoJSON (RFC 7946) valido.
 // NOTA: per avere un'idea dell'input vedere il test corrispondente,
 // per il GeoJSON finale da generare vedere il file `mock.js`.
-export function createGeoJSON(data) {}
+export function createGeoJSON(data) {
+  const points = data.pointsOfInterest.map((item) => ({
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [item.coordinates.lng, item.coordinates.lat]
+    },
+    properties: {
+      name: item.name
+    }
+  }))
+  const lines = data.streets.map((item) => ({
+    type: 'Feature',
+    geometry: {
+      type: 'LineString',
+      coordinates: [
+        ...new Set([
+          ...JSON.parse(item.polyline)
+            .map((obj) => [obj.start, obj.end])
+            .reduce((acc, item) => (acc = [...acc, ...item]), [])
+            .map((obj) => [obj.lng, obj.lat])
+            .reduce(
+              (acc, [lng, lat]) =>
+                (acc =
+                  acc.length !== 0 &&
+                  acc.at(-1)[0] === lng &&
+                  acc.at(-1)[1] === lat
+                    ? acc
+                    : [...acc, [lng, lat]]),
+              []
+            )
+        ])
+      ]
+    },
+    properties: { lanes: item.extraProps.lane, name: item.name }
+  }))
+  const features = [...points, ...lines]
+  return { type: 'FeatureCollection', features: features }
+}
 
 // Dati un array contentente le coordinate [lng, lat] di alcune geometrie (linee e punti),
 // e un punto con coordinate [lng, lat], stabilire se il punto interseca una o più geometrie del primo array.
